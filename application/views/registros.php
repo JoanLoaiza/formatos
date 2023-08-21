@@ -25,6 +25,7 @@
                             <label class="form-label" for="telefono">Telefono</label>
                             <input type="text" id="telefono" class="form-control" />
                         </div>
+                        <label class="form-label" for="direccion">Dirección</label>
                         <div class="form-outline">
                             <input type="text" id="direccion" class="form-control" />
                         </div>
