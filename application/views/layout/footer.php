@@ -3,9 +3,8 @@
 <script src="<?php echo base_url('assets/vendor/chart.js/Chart.min.js');?>"></script>
 <script src="<?php echo base_url('assets/vendor/just-validate/js/just-validate.min.js');?>"></script>
 <script src="<?php echo base_url('assets/vendor/choices.js/public/assets/scripts/choices.min.js');?>"></script>
-<script src="<?php echo base_url('assets/js/charts-home.js');?>"></script>
 <!-- Main File-->
-<script src="<?php echo base_url('assets/js/front.js');?>"></script>
+<script src="<?php echo base_url('assets/js/front.js');?>"></>
 <script>
     
 function alerta(icon, title, text = '', timer = 3000) {
