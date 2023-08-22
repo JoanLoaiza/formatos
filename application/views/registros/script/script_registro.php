@@ -13,11 +13,12 @@ $(document).ready(function() {
 });
 
 function guardarRegistro() {
-    var documento = $('#documento').val();
-    var nombre_completo = $('#nomre_completo').val();
-    var telefono = $('#telefono').val();
-    var direccion = $('#direccion').val();
-    var hoja = $('#hoja').is(':checked') ? 1 : 0;
+    let documento = $('#documento').val();
+    let nombre_completo = $('#nomre_completo').val();
+    let telefono = $('#telefono').val();
+    let direccion = $('#direccion').val();
+    let hoja = $('#hoja').is(':checked') ? 1 : 0;
+    let fecha_modal = $('#fecha_modal').length ? $('#fecha_modal').val() : null;
     if (documento == '' || nomre_completo == '' || telefono == '' || direccion == '') {
         alerta('error', 'Error', 'Todos los campos son obligatorios')
     } else {
@@ -30,7 +31,8 @@ function guardarRegistro() {
                 nombre_completo: nombre_completo,
                 telefono: telefono,
                 direccion: direccion,
-                hoja: hoja
+                hoja: hoja,
+                fecha_modal: fecha_modal
             },
             success: function(data) {
                 if (data.error) {
@@ -40,6 +42,11 @@ function guardarRegistro() {
                 }
                 alerta('success', 'Registro guardado correctamente!');
                 listarRegistros();
+                if ($('#fecha_modal').length) {
+                    $('#modalRegistro').modal('hide');
+                    mostrarContenido();
+                    $('#fecha_modal').val('');
+                }
                 $('#documento').val('');
                 $('#nomre_completo').val('');
                 $('#telefono').val('');

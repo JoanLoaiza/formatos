@@ -36,7 +36,7 @@ class Registros extends CI_Controller
             'telefono' => $this->input->post('telefono'),
             'direccion' => $this->input->post('direccion'),
             'hoja' => $this->input->post('hoja') == 1 ? true : false,
-            'fecha_registro' => date('Y-m-d'),
+            'fecha_registro' => !empty($this->input->post('fecha_modal')) ? $this->input->post('fecha_modal') : date('Y-m-d'),
         );
         if ($this->Registros_model->validarDocumento($data['documento'])) {
             die(json_encode(array('error' => 'El documento ya se encuentra registrado')));

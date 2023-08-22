@@ -31,6 +31,7 @@ function mostrarContenido(fecha = null) {
                         </td>
                     </tr>`;
             }
+            let fecha_registro = data[0].fecha_registro;
 
             // Crear el contenido del tab
             var tabContent = `
@@ -40,7 +41,7 @@ function mostrarContenido(fecha = null) {
                                 <thead class="table-dark sticky-header">
                                     <tr class="${fecha || 'd-none'}">
                                         <th colspan="6">Reunión ${fecha || ''}
-                                            <button class="btn btn-primary btn-sm btn-default float-end" title="Añadir una persona a la fecha" onclick="loadModal(${fecha})">
+                                            <button class="btn btn-primary btn-sm btn-default float-end" title="Añadir una persona a la fecha" onclick="loadModal('${fecha_registro}')">
                                                 <i class="fa-solid fa-user-plus fa-xs"></i>
                                             </button>
                                         </th>
