@@ -25,9 +25,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |				 odbc, pdo, postgre, sqlite, sqlite3, sqlsrv
 |	['dbprefix'] You can add an optional prefix, which will be added
 |				 to the table name when using the  Query Builder class
-|	['pconnect'] TRUE/false - Whether to use a persistent connection
-|	['db_debug'] TRUE/false - Whether database errors should be displayed.
-|	['cache_on'] TRUE/false - Enables/disables query caching
+|	['pconnect'] true/false - Whether to use a persistent connection
+|	['db_debug'] true/false - Whether database errors should be displayed.
+|	['cache_on'] true/false - Enables/disables query caching
 |	['cachedir'] The path to the folder where cache files should be stored
 |	['char_set'] The character set used in communicating with the database
 |	['dbcollat'] The character collation used in communicating with the database
@@ -41,7 +41,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |	['swap_pre'] A default table prefix that should be swapped with the dbprefix
 |	['encrypt']  Whether or not to use an encrypted connection.
 |
-|			'mysql' (deprecated), 'sqlsrv' and 'pdo/sqlsrv' drivers accept TRUE/false
+|			'mysql' (deprecated), 'sqlsrv' and 'pdo/sqlsrv' drivers accept true/false
 |			'mysqli' and 'pdo/mysql' drivers accept an array with the following options:
 |
 |				'ssl_key'    - Path to the private key file
@@ -49,17 +49,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |				'ssl_ca'     - Path to the certificate authority file
 |				'ssl_capath' - Path to a directory containing trusted CA certificates in PEM format
 |				'ssl_cipher' - List of *allowed* ciphers to be used for the encryption, separated by colons (':')
-|				'ssl_verify' - TRUE/false; Whether verify the server certificate or not
+|				'ssl_verify' - true/false; Whether verify the server certificate or not
 |
 |	['compress'] Whether or not to use client compression (MySQL only)
-|	['stricton'] TRUE/false - forces 'Strict Mode' connections
+|	['stricton'] true/false - forces 'Strict Mode' connections
 |							- good for ensuring strict SQL while developing
 |	['ssl_options']	Used to set various SSL options that can be used when making SSL connections.
 |	['failover'] array - A array with 0 or more data for connections if the main should fail.
-|	['save_queries'] TRUE/false - Whether to "save" all executed queries.
+|	['save_queries'] true/false - Whether to "save" all executed queries.
 | 				NOTE: Disabling this will also effectively disable both
 | 				$this->db->last_query() and profiling of DB queries.
-| 				When you run a query, with this setting set to TRUE (default),
+| 				When you run a query, with this setting set to true (default),
 | 				CodeIgniter will store the SQL statement for debugging purposes.
 | 				However, this may cause high memory usage, especially if you run
 | 				a lot of SQL queries ... disable this to avoid that problem.
@@ -73,7 +73,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = true;
 
-$db['default'] = array(
+/*$db['default'] = array(
     'dsn' => '',
     'hostname' => 'dpg-cjhnve337aks739i4nig-a.oregon-postgres.render.com',
     'username' => 'postgres_registros',
@@ -94,4 +94,26 @@ $db['default'] = array(
     'failover' => array(),
     'save_queries' => true,
     'port' => 5432,  // Default PostgreSQL port
+);*/
+
+$db['default'] = array(
+	'dsn'	=> '',
+	'hostname' => 'localhost',
+	'username' => 'postgres',
+	'password' => '1120',
+	'database' => 'registros_database',
+	'dbdriver' => 'postgre',
+	'dbprefix' => '',
+	'pconnect' => false,
+	'db_debug' => (ENVIRONMENT !== 'development'),
+	'cache_on' => false,
+	'cachedir' => '',
+	'char_set' => 'utf8',
+	'dbcollat' => 'utf8_general_ci',
+	'swap_pre' => '',
+	'encrypt' => false,
+	'compress' => false,
+	'stricton' => false,
+	'failover' => array(),
+	'save_queries' => true
 );

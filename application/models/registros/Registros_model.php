@@ -18,13 +18,23 @@ class Registros_model extends CI_Model
 
     public function validarDocumento($documento){
         $this->db->where('documento', $documento);
+        $this->db->where('fecha_registro', date('Y-m-d'));
         $query = $this->db->get('registros');
         return $query->num_rows() > 0;
     }
 
-    public function listarRegistros(){
+    public function listarRegistros($fecha = null, $todos = false){
         $this->db->select('*');
         $this->db->from('registros');
+        if ($fecha != null) {
+            $this->db->where('fecha_registro', $fecha);
+        }
+        
+        if ($todos) {
+            $this->db->where('fecha_registro >=', date('Y-m-d', strtotime('-1 month')));
+        } else {
+            $this->db->where('fecha_registro', date('Y-m-d'));
+        }
         $this->db->order_by('id', 'DESC');
         $query = $this->db->get();
         return $query->result(); // Use result() instead of result_array()
@@ -37,18 +47,18 @@ class Registros_model extends CI_Model
         return $this->db->get()->num_rows();
     }
 
-    public function registrosXMes() {
-        $this->db->select('EXTRACT(MONTH FROM fecha_registro) as mes, COUNT(*) as total');
+    public function registrosReunion() {
+        $this->db->select('fecha_registro, COUNT(*) as cantidad_registros');
         $this->db->from('registros');
-        $this->db->group_by('mes');
-        $this->db->order_by('mes', 'ASC');
+        $this->db->group_by('fecha_registro');
         return $this->db->get()->result();
     }
 
-    public function getRegistro($id){
+    public function getRegistro($id = null, $documento = null){
         $this->db->select('*');
         $this->db->from('registros');
-        $this->db->where('id', $id);
+        if ($id != null) $this->db->where('id', $id);
+        if ($documento != null) $this->db->where('documento', $documento);
         $query = $this->db->get();
         return $query->row(); // Use result() instead of result_array()
     }

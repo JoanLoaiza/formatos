@@ -4,9 +4,8 @@
 <script src="<?php echo base_url('assets/vendor/just-validate/js/just-validate.min.js');?>"></script>
 <script src="<?php echo base_url('assets/vendor/choices.js/public/assets/scripts/choices.min.js');?>"></script>
 <!-- Main File-->
-<script src="<?php echo base_url('assets/js/front.js');?>"></>
+<script src="<?php echo base_url('assets/js/front.js');?>"></script>
 <script>
-    
 function alerta(icon, title, text = '', timer = 3000) {
     Swal.fire({
         icon: icon,

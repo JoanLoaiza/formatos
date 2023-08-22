@@ -28,16 +28,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="<?php echo base_url('assets/css/custom.css'); ?>">
     <!-- Favicon -->
-    <link rel="icon" href="<?php echo base_url('assets/img/favicon.ico'); ?>" type="image/png">
+    <link rel="icon" href="<?php echo base_url('assets/img/faviconLogo.png'); ?>" type="image/png">
     <!-- SweetAlert2 -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+        integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 
 <body>
     <div class="page">
         <!-- Main Navbar-->
         <header class="header z-index-50">
-            <nav class="nav navbar py-3 px-0 shadow-sm text-white position-relative" aria-label="Main navigation">
+            <nav class="nav navbar py-3 px-0 shadow-sm text-white position-relative bg-warning" aria-label="Main navigation">
                 <!-- Search Box-->
                 <div class="search-box shadow-sm">
                     <button class="dismiss d-flex align-items-center">
@@ -71,9 +75,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <!-- Logout    -->
                             <li class="nav-item"><a class="nav-link text-white" href="login.html"> <span
                                         class="d-none d-sm-inline">Cerrar sesión</span>
-                                    <svg class="svg-icon svg-icon-xs svg-icon-heavy">
-                                        <use xlink:href="#security-1"> </use>
-                                    </svg></a></li>
+                                        <i class="fa-solid fa-right-from-bracket"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -85,7 +87,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <!-- Sidebar Header-->
                 <div class="sidebar-header d-flex align-items-center py-4 px-3"><img
                         class="avatar shadow-0 img-fluid rounded-circle"
-                        src="<?php echo base_url('assets/img/avatar-8.jpg');?>" alt="...">
+                        src="<?php echo base_url('assets/img/faviconLogo.svg');?>" alt="...">
                     <div class="ms-3 title">
                         <h1 class="h4 mb-2">Envio masivo</h1>
                         <p class="text-sm text-gray-500 fw-light mb-0 lh-1">Registro de usuarios</p>
@@ -95,17 +97,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                     class="text-uppercase text-gray-400 text-xs letter-spacing-0 mx-3 px-2 heading">Menú</span>
                 <ul class="list-unstyled py-4">
                     <li class="sidebar-item"><a class="sidebar-link" href="<?php echo base_url('registros');?>">
-                            <svg class="svg-icon svg-icon-sm svg-icon-heavy me-xl-2">
-                                <use xlink:href="#real-estate-1"> </use>
-                            </svg>Registros </a></li>
+                            <i class="fa-solid fa-house fa-xl me-md-3"></i> Registros </a></li>
                     <li class="sidebar-item"><a class="sidebar-link" href="<?php echo base_url('estadisticas');?>">
-                            <svg class="svg-icon svg-icon-sm svg-icon-heavy me-xl-2">
-                                <use xlink:href="#sales-up-1"> </use>
-                            </svg>Estadisticas </a></li>
+                            <i class="fa-solid fa-chart-line fa-xl me-md-3"></i>Reportes </a></li>
                     <li class="sidebar-item"><a class="sidebar-link" href="<?php echo base_url('configuracion');?>">
-                            <svg class="svg-icon svg-icon-sm svg-icon-heavy me-xl-2">
-                                <use xlink:href="#survey-1"> </use>
-                            </svg>Configuración </a></li>
+                            <i class="fa-solid fa-gear fa-xl me-md-3"></i>Configuración </a></li>
                     <li class="sidebar-item d-none"><a class="sidebar-link" href="login.html">
                             <svg class="svg-icon svg-icon-sm svg-icon-heavy me-xl-2">
                                 <use xlink:href="#disable-1"> </use>

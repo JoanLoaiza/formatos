@@ -12,21 +12,20 @@ class Registros extends CI_Controller
 
     public function index(){
         $this->load->view('layout/head');
-        $this->load->view('registros');
+        $this->load->view('registros/registros');
         $this->load->view('layout/footer');
     }
 
     public function estadisticas(){
-        $data['total_registros'] = $this->Registros_model->totalRegistros();
-        $data['registros_x_mes'] = $this->Registros_model->registrosXMes();
+        $data['registros_reunion'] = $this->Registros_model->registrosReunion();
         $this->load->view('layout/head');
-        $this->load->view('estadisticas', $data);
+        $this->load->view('estadisticas/estadisticas', $data);
         $this->load->view('layout/footer');
     }
 
     public function configuracion() {
         $this->load->view('layout/head');
-        $this->load->view('configuracion');
+        $this->load->view('confi/configuracion');
         $this->load->view('layout/footer');
     }
 
@@ -39,7 +38,7 @@ class Registros extends CI_Controller
             'hoja' => $this->input->post('hoja') == 1 ? true : false,
             'fecha_registro' => date('Y-m-d'),
         );
-        if ($this->Registros_model->validarDocumento($data['documento']) == true) {
+        if ($this->Registros_model->validarDocumento($data['documento'])) {
             die(json_encode(array('error' => 'El documento ya se encuentra registrado')));
         } else {
             die(json_encode($this->Registros_model->guardarNuevoRegistro($data)));
@@ -47,13 +46,11 @@ class Registros extends CI_Controller
     }
 
     public function listarRegistros() {
-        $registros = $this->Registros_model->listarRegistros();
-        $data['data'] = $registros; // Wrap the data in a 'data' key
-        echo json_encode($data);
+        die(json_encode($this->Registros_model->listarRegistros($this->input->post('fecha'), $this->input->post('todos'))));
     }
 
     public function getRegistro(){
-        die(json_encode($this->Registros_model->getRegistro($this->input->post('id'))));
+        die(json_encode($this->Registros_model->getRegistro($this->input->post('id'), $this->input->post('documento'))));
     }
 
     public function editarRegistro(){
@@ -62,8 +59,7 @@ class Registros extends CI_Controller
             'nombre' => $this->input->post('nombre_completo'),
             'telefono' => $this->input->post('telefono'),
             'direccion' => $this->input->post('direccion'),
-            'hoja' => $this->input->post('hoja') == 1 ? true : false,
-            'fecha_registro' => date('Y-m-d'),
+            'hoja' => $this->input->post('hoja') == 1 ? true : false
         );
         die(json_encode($this->Registros_model->editarRegistro($data, $this->input->post('id'))));
     }
