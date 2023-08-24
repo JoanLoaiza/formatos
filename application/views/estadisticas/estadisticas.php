@@ -9,28 +9,37 @@
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3">
                 <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <button class="btn btn-primary btn-block m-1 position-relative" id="v-pills-all-tab"
-                        data-bs-toggle="pill" data-bs-target="#v-pills-all" type="button" role="tab"
-                        aria-controls="v-pills-all" aria-selected="true" onclick="mostrarContenido('')">Todas las
-                        reuniones
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            <?php $total = 0; foreach ($registros_reunion as $report) { $total += $report->cantidad_registros; } echo $total; ?>
-                            <span class="visually-hidden">unread messages</span>
-                        </span>
-                    </button>
+                    <div class="btn-group mt-1 position-relative" role="group" aria-label="Basic example">
+                        <button class="btn btn-primary btn-block" id="v-pills-all-tab"
+                            data-bs-toggle="pill" data-bs-target="#v-pills-all" type="button" role="tab"
+                            aria-controls="v-pills-all" aria-selected="true" onclick="mostrarContenido('')">Todas las
+                            reuniones</button>
+                        <button class="btn btn-success btn-block" title="Descargar registros en formato Excel"
+                            onclick="descargarExcel('tabla-registros-')"><i
+                                class="fas fa-file-excel"></i>
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                <?php $total = 0; foreach ($registros_reunion as $report) { $total += $report->cantidad_registros; } echo $total; ?>
+                                <span class="visually-hidden">unread messages</span>
+                            </span>
+                        </button>
+                    </div>
 
                     <?php foreach ($registros_reunion as $report) :?>
-                    <button class="btn btn-primary btn-block m-1 position-relative"
-                        id="v-pills-<?php echo $report->fecha_registro; ?>-tab" data-bs-toggle="pill"
-                        data-bs-target="#v-pills-<?php echo $report->fecha_registro; ?>" type="button" role="tab"
-                        aria-controls="v-pills-<?php echo $report->fecha_registro; ?>" aria-selected="true"
-                        onclick="mostrarContenido('<?php echo $report->fecha_registro; ?>')">Reunión
-                        <?php echo $report->fecha_registro; ?>
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            <?php echo $report->cantidad_registros; ?>
-                            <span class="visually-hidden">unread messages</span>
-                        </span>
-                    </button>
+                    <div class="btn-group mt-1 position-relative" role="group" aria-label="Basic example">
+                        <button class="btn btn-primary btn-block"
+                            id="v-pills-<?php echo $report->fecha_registro; ?>-tab" data-bs-toggle="pill"
+                            data-bs-target="#v-pills-<?php echo $report->fecha_registro; ?>" type="button" role="tab"
+                            aria-controls="v-pills-<?php echo $report->fecha_registro; ?>" aria-selected="true"
+                            onclick="mostrarContenido('<?php echo $report->fecha_registro; ?>')">Reunión
+                            <?php echo $report->fecha_registro; ?>
+                            <span
+                                class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                                <?php echo $report->cantidad_registros; ?>
+                                <span class="visually-hidden">unread messages</span>
+                            </span>
+                        </button>
+                    </div>
                     <?php endforeach;?>
                 </div>
             </div>

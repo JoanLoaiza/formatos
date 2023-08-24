@@ -37,10 +37,10 @@ function mostrarContenido(fecha = null) {
             var tabContent = `
                 <div class="tab-pane fade show active shadow" id="v-pills-${fecha || ''}" role="tabpanel" aria-labelledby="v-pills-${fecha ||''}-tab">
                     <div class="table-responsive rounded" style="overflow-y: auto; max-height: 100vh; background-color: #fff;">
-                        <table class="table table-striped table-hover table-sm" style="width: 100%;">
+                        <table class="table table-striped table-hover table-sm" style="width: 100%;" id="tabla-registros-${fecha || ''}">
                                 <thead class="table-dark sticky-header">
                                     <tr class="${fecha || 'd-none'}">
-                                        <th colspan="6">Reunión ${fecha || ''}
+                                        <th colspan="6">Reunión ${fecha || ''} <button class="btn btn-sm btn-success" title="Descargar registros en formato Excel" onclick="descargarExcel('tabla-registros-${fecha || ''}')"><i class="fas fa-file-excel"></i></button>
                                             <button class="btn btn-primary btn-sm btn-default float-end" title="Añadir una persona a la fecha" onclick="loadModal('${fecha_registro}')">
                                                 <i class="fa-solid fa-user-plus fa-xs"></i>
                                             </button>
@@ -68,6 +68,19 @@ function mostrarContenido(fecha = null) {
         }
     });
 }
+function descargarExcel(nombreTabla) {
+    var table = document.getElementById(nombreTabla);
+    // Elimina la última columna de la tabla antes de generar el libro Excel
+    var rows = table.rows;
+    for (var i = 0; i < rows.length; i++) {
+        rows[i].deleteCell(-1); // Elimina la última celda de cada fila
+    }
+    var wb = XLSX.utils.table_to_book(table, {
+        sheet: "Sheet JS"
+    });
+    XLSX.writeFile(wb, "Registros.xlsx");
+}
+
 
 function loadModal(fecha) {
     $('#btnGuardar').attr('onclick', 'guardarRegistro()').removeClass(

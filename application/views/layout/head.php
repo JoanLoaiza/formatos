@@ -35,13 +35,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- XLSX -->
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.0/package/dist/xlsx.full.min.js"></script>
 </head>
 
 <body>
     <div class="page">
         <!-- Main Navbar-->
         <header class="header z-index-50">
-            <nav class="nav navbar py-3 px-0 shadow-sm text-white position-relative bg-warning" aria-label="Main navigation">
+            <nav class="nav navbar py-3 px-0 shadow-sm text-white position-relative bg-warning"
+                aria-label="Main navigation">
                 <!-- Search Box-->
                 <div class="search-box shadow-sm">
                     <button class="dismiss d-flex align-items-center">
@@ -75,7 +78,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                             <!-- Logout    -->
                             <li class="nav-item"><a class="nav-link text-white" href="login.html"> <span
                                         class="d-none d-sm-inline">Cerrar sesión</span>
-                                        <i class="fa-solid fa-right-from-bracket"></i></a></li>
+                                    <i class="fa-solid fa-right-from-bracket"></i></a></li>
                         </ul>
                     </div>
                 </div>
