@@ -68,4 +68,9 @@ class Registros_model extends CI_Model
         $this->db->update('registros', $data);
         return $this->db->affected_rows() > 0;
     }
+
+    public function guardarReunion($nombre_reunion){
+        $this->db->insert('reunion', array('nombre_reunion' => $nombre_reunion));
+        return $this->db->insert_id();
+    }
 }

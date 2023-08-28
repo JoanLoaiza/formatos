@@ -8,6 +8,18 @@ class Configuracion extends CI_Controller
     public function __construct(){
         parent::__construct();
         $this->load->model('confi/Confi_model');
+        $this->load->model('auth/Login_model');
+    }
+
+    public function index() {
+        if($this->Login_model->validateSession()){
+            $this->load->view('layout/head');
+            $this->load->view('layout/nav');
+            $this->load->view('confi/configuracion');
+            $this->load->view('layout/footer');
+        }else{
+            redirect('login');
+        }
     }
 
     public function guardarMensaje(){

@@ -2,7 +2,7 @@
     <!-- Page Header-->
     <header class="bg-white shadow-sm px-4 py-3 z-index-20">
         <div class="container-fluid px-0">
-            <h2 class="mb-0 p-1">Inicio</h2>
+            <h2 class="mb-0 p-1">Registros personas</h2>
         </div>
     </header>
     <div class="container-fluid">
@@ -10,7 +10,16 @@
             <div class="col-sm-12 col-md-12 col-lg-4 col-xl-4">
                 <div class="card border border-dark">
                     <div class="card-header bg-dark text-white">
-                        <h3 class="card-title" style="font-size: 1.2rem;">Nuevo registro</h3>
+                        <h4 class="card-title" style="font-size: 1.0rem;">Nuevo registro
+
+                            <div class="input-group input-group-sm float-end">
+                                <input type="text" class="form-control" placeholder="Nombre reunión"
+                                    aria-label="Nombre reunión" aria-describedby="btnGuardarReunion" id="nombreReunion">
+                                <button class="btn btn-primary" type="button" id="btnGuardarReunion"
+                                    onclick="guardarReunion()"><i class="fas fa-save"></i> Guardar</button>
+                                <input type="hidden" value="" id="id_reunion" name="id_reunion">
+                            </div>
+                        </h4>
                     </div>
                     <div class="card-body">
                         <div class="form-outline">

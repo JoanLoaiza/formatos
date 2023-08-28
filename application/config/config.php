@@ -35,7 +35,8 @@ $config['base_url'] = 'http://formatos.test/';
 | variable so that it is blank.
 |
 */
-$config['index_page'] = 'index.php';
+$config['index_page'] = '';
+$config['reload_js']    = '?reload_js=2';
 
 /*
 |--------------------------------------------------------------------------

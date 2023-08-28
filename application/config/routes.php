@@ -49,19 +49,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Examples:	my-controller/index	-> my_controller/index
 |		my-controller/my-method	-> my_controller/my_method
 */
-$route['default_controller'] = 'registros';
+$route['default_controller'] = 'welcome';
 $route['404_override'] = '';
-$route['translate_uri_dashes'] = FALSE;
+$route['translate_uri_dashes'] = false;
 
 /* Custom Routes */
-$route['login'] = 'auth/login';
-$route['logout'] = 'auth/logout';
+$route['login'] = 'auth/Login';
+$route['logout'] = 'auth/Login/logout';
 $route['register'] = 'auth/register';
 $route['forgot-password'] = 'auth/forgot_password';
 $route['reset-password'] = 'auth/reset_password';
 
 /* Registros */
 $route['registros'] = 'registros/Registros';
-$route['estadisticas'] = 'registros/Registros/estadisticas';
-$route['configuracion'] = 'registros/Registros/configuracion';
+$route['reportes'] = 'registros/Registros/estadisticas';
+$route['configuracion'] = 'confi/Configuracion';
 
+/* Redireccionar todas las rutas no definidas al controlador de login */
+$route['(:any)'] = 'auth/login';

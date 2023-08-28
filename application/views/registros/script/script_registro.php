@@ -12,13 +12,49 @@ $(document).ready(function() {
     });
 });
 
-function guardarRegistro() {
+function guardarReunion(nombreReunion = null) {
+    let nombre_reunion = $('#nombreReunion').val() ?? nombreReunion;
+    if (nombre_reunion == '') {
+        alerta('error', 'Error', 'El nombre de la reunión es obligatorio');
+        return false;
+    }
+
+    $.ajax({
+        url: '<?= base_url('registros/Registros/guardarReunion');?>',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            nombre_reunion: nombre_reunion
+        },
+        success: function(data) {
+            if (data) {
+                $('#id_reunion').val(data);
+                $('#nombreReunion').prop('readonly', true);
+                $('#btnGuardarReunion').removeClass('btn-primary').addClass('btn-danger').html(
+                    '<i class="fas fa-times"></i> Finalizar').attr('onclick', 'finalizarReunion()');
+                alerta('success', 'Info', 'Se guardo la reunión');
+            } else {
+                alerta('error', 'Error', 'No se pudo guardar la reunión');
+            }
+        }
+    })
+}
+
+async function guardarRegistro() {
     let documento = $('#documento').val();
     let nombre_completo = $('#nomre_completo').val();
     let telefono = $('#telefono').val();
     let direccion = $('#direccion').val();
     let hoja = $('#hoja').is(':checked') ? 1 : 0;
     let fecha_modal = $('#fecha_modal').length ? $('#fecha_modal').val() : null;
+    let id_reunion = $('#id_reunion').val();
+    let nombre_reunion = $('#nombreReunion').val();
+
+    if (id_reunion == '' && nombre_reunion != '') {
+        await guardarReunion(nombreReunion);
+        id_reunion = $('#id_reunion').val();
+    }
+
     if (documento == '' || nomre_completo == '' || telefono == '' || direccion == '') {
         alerta('error', 'Error', 'Todos los campos son obligatorios')
     } else {
@@ -32,7 +68,8 @@ function guardarRegistro() {
                 telefono: telefono,
                 direccion: direccion,
                 hoja: hoja,
-                fecha_modal: fecha_modal
+                fecha_modal: fecha_modal,
+                id_reunion: id_reunion
             },
             success: function(data) {
                 if (data.error) {
