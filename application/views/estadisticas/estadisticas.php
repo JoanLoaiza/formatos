@@ -9,14 +9,13 @@
         <div class="row">
             <div class="col-sm-12 col-md-12 col-lg-3 col-xl-3">
                 <div class="nav flex-column nav-pills me-3" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                    <div class="btn-group mt-1 position-relative" role="group" aria-label="Basic example">
-                        <button class="btn btn-primary btn-block" id="v-pills-all-tab"
-                            data-bs-toggle="pill" data-bs-target="#v-pills-all" type="button" role="tab"
-                            aria-controls="v-pills-all" aria-selected="true" onclick="mostrarContenido('')">Todas las
+                    <div class="btn-group btn-group-sm mt-1 position-relative" role="group" aria-label="Basic example">
+                        <button class="btn btn-primary btn-block" id="v-pills-all-tab" data-bs-toggle="pill"
+                            data-bs-target="#v-pills-all" type="button" role="tab" aria-controls="v-pills-all"
+                            aria-selected="true" onclick="mostrarContenido('')">Todas las
                             reuniones</button>
                         <button class="btn btn-success btn-block" title="Descargar registros en formato Excel"
-                            onclick="descargarExcel('tabla-registros-')"><i
-                                class="fas fa-file-excel"></i>
+                            onclick="descargarExcel('tabla-registros-')"><i class="fas fa-file-excel"></i>
                             <span
                                 class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                 <?php $total = 0; foreach ($registros_reunion as $report) { $total += $report->cantidad_registros; } echo $total; ?>
@@ -26,13 +25,16 @@
                     </div>
 
                     <?php foreach ($registros_reunion as $report) :?>
-                    <div class="btn-group mt-1 position-relative" role="group" aria-label="Basic example">
+                    <div class="btn-group btn-group-sm mt-1 position-relative" role="group" aria-label="Basic example">
+                        <button type="button" class="btn btn-warning" title="Editar nombre registro"
+                            onclick="editarNombreReunion(<?php echo $report->id_reunion; ?>)"><i
+                                class="fas fa-edit"></i></button>
                         <button class="btn btn-primary btn-block"
                             id="v-pills-<?php echo $report->fecha_registro; ?>-tab" data-bs-toggle="pill"
                             data-bs-target="#v-pills-<?php echo $report->fecha_registro; ?>" type="button" role="tab"
                             aria-controls="v-pills-<?php echo $report->fecha_registro; ?>" aria-selected="true"
-                            onclick="mostrarContenido('<?php echo $report->fecha_registro; ?>')">Reunión
-                            <?php echo $report->fecha_registro; ?>
+                            onclick="mostrarContenido('<?php echo $report->fecha_registro; ?>')">
+                            <?php echo $report->nombre_reunion . ' ' .$report->fecha_registro; ?>
                             <span
                                 class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                                 <?php echo $report->cantidad_registros; ?>
@@ -62,7 +64,7 @@
                     <h5 class="modal-title" id="modalRegistroLabel">Nuevo registro para la fecha</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" id="bodymodalRegistro">
                     <div class="form-outline">
                         <label class="form-label" for="documento">N° documento</label>
                         <input type="text" id="documento" class="form-control" />
@@ -75,8 +77,8 @@
                         <label class="form-label" for="telefono">Telefono</label>
                         <input type="text" id="telefono" class="form-control" />
                     </div>
-                    <label class="form-label" for="direccion">Dirección</label>
                     <div class="form-outline">
+                        <label class="form-label" for="direccion">Dirección</label>
                         <input type="text" id="direccion" class="form-control" />
                     </div>
                     <div class="form-group">
@@ -85,6 +87,12 @@
                     </div>
                     <input type="hidden" id="fecha_modal">
                     <input type="hidden" id="id">
+                </div>
+                <div class="modal-body d-none" id="bodymodalRegistroReunion">
+                    <div class="form-outline">
+                        <label class="form-label" for="nombre_reunion">Nombre reunión</label>
+                        <input type="text" id="nombre_reunion" class="form-control" />
+                    </div>
                 </div>
                 <div class="modal-footer d-flex justify-content-between align-content-center">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>

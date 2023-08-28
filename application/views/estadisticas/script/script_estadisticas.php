@@ -68,6 +68,7 @@ function mostrarContenido(fecha = null) {
         }
     });
 }
+
 function descargarExcel(nombreTabla) {
     var table = document.getElementById(nombreTabla);
     // Elimina la última columna de la tabla antes de generar el libro Excel
@@ -89,5 +90,58 @@ function loadModal(fecha) {
         .html('Guardar');
     $('#modalRegistro').modal('show');
     $('#fecha_modal').val(fecha);
+}
+
+function editarNombreReunion(idReunion) {
+    $.ajax({
+        url: '<?= base_url('registros/Registros/getReunion');?>',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            id_reunion: idReunion
+        },
+        success: function(data) {
+            data.nombre_reunion = data.nombre_reunion.replace('REUNIÓN', '');
+            $('#bodymodalRegistro').addClass('d-none');
+            $('#bodymodalRegistroReunion').removeClass('d-none');
+            $('#btnGuardar').attr('onclick', 'editarReunion(' + idReunion + ')').removeClass(
+                    'btn-primary')
+                .addClass('btn-warning')
+                .html('Editar');
+            $('#nombre_reunion').val(data.nombre_reunion);
+            $('#modalRegistro').modal('show');
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
+}
+
+function editarReunion(idReunion) {
+    $.ajax({
+        url: '<?= base_url('registros/Registros/updateReunion');?>',
+        type: 'POST',
+        dataType: 'json',
+        data: {
+            id_reunion: idReunion,
+            nombre_reunion: $('#nombre_reunion').val()
+        },
+        success: function(data) {
+            if (data) {
+                $('#modalRegistro').modal('hide');
+                $('#btnGuardar').attr('onclick', 'guardarRegistro()').removeClass(
+                        'btn-warning')
+                    .addClass('btn-primary')
+                    .html('Guardar');
+                alerta('success', 'Reunión actualizada correctamente');
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
+            }
+        },
+        error: function(error) {
+            console.log(error);
+        }
+    });
 }
 </script>

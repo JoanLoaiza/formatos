@@ -35,6 +35,7 @@ class Registros_model extends CI_Model
         } else {
             $this->db->where('fecha_registro', date('Y-m-d'));
         }
+        $this->db->where('id_grupo', $this->session->userdata('id_grupo'));
         $this->db->order_by('id', 'DESC');
         $query = $this->db->get();
         return $query->result(); // Use result() instead of result_array()
@@ -48,9 +49,10 @@ class Registros_model extends CI_Model
     }
 
     public function registrosReunion() {
-        $this->db->select('fecha_registro, COUNT(*) as cantidad_registros');
-        $this->db->from('registros');
-        $this->db->group_by('fecha_registro');
+        $this->db->select('re.nombre_reunion,re.id_reunion, reg.fecha_registro, COUNT(reg.*) as cantidad_registros');
+        $this->db->from('registros as reg');
+        $this->db->join('reunion as re', 're.id_reunion = reg.id_reunion');
+        $this->db->group_by('re.nombre_reunion, re.id_reunion, reg.fecha_registro');
         return $this->db->get()->result();
     }
 
@@ -70,7 +72,23 @@ class Registros_model extends CI_Model
     }
 
     public function guardarReunion($nombre_reunion){
-        $this->db->insert('reunion', array('nombre_reunion' => $nombre_reunion));
+        $temp = 'REUNIÓN' . strtoupper($nombre_reunion);
+        $this->db->insert('reunion', array('nombre_reunion' => $temp));
         return $this->db->insert_id();
+    }
+
+    public function updateReunion($id_reunion, $nombre_reunion){
+        $temp = 'REUNIÓN' . strtoupper($nombre_reunion);
+        $this->db->where('id_reunion', $id_reunion);
+        $this->db->update('reunion', array('nombre_reunion' => $temp));
+        return $this->db->affected_rows() > 0;
+    }
+
+    public function getReunion($idReunion){
+        $this->db->select('*');
+        $this->db->from('reunion');
+        $this->db->where('id_reunion', $idReunion);
+        $query = $this->db->get();
+        return $query->row(); // Use result() instead of result_array()
     }
 }

@@ -73,4 +73,12 @@ class Registros extends CI_Controller
         );
         die(json_encode($this->Registros_model->editarRegistro($data, $this->input->post('id'))));
     }
+
+    public function updateReunion(){
+        die(json_encode($this->Registros_model->updateReunion($this->input->post('id_reunion'), $this->input->post('nombre_reunion'))));
+    }
+
+    public function getReunion(){
+        die(json_encode($this->Registros_model->getReunion($this->input->post('id_reunion'))));
+    }
 }
