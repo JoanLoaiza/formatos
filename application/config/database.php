@@ -73,7 +73,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = true;
 
-/*$db['default'] = array(
+$db['default'] = array(
     'dsn' => '',
     'hostname' => 'dpg-cjhnve337aks739i4nig-a.oregon-postgres.render.com',
     'username' => 'postgres_registros',
@@ -94,8 +94,8 @@ $query_builder = true;
     'failover' => array(),
     'save_queries' => true,
     'port' => 5432,  // Default PostgreSQL port
-);*/
-
+);
+/*
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
@@ -116,4 +116,4 @@ $db['default'] = array(
 	'stricton' => false,
 	'failover' => array(),
 	'save_queries' => true
-);
+);*/

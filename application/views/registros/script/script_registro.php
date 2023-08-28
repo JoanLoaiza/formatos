@@ -10,6 +10,15 @@ $(document).ready(function() {
             validarPersona();
         }
     });
+
+    //Validar si hay una reunión activa en el sessionStorage
+    if (sessionStorage.getItem('id_reunion') != null) {
+        $('#nombreReunion').val(sessionStorage.getItem('nombre_reunion'));
+        $('#nombreReunion').prop('readonly', true);
+        $('#btnGuardarReunion').removeClass('btn-primary').addClass('btn-danger').html(
+            '<i class="fas fa-times"></i> Finalizar').attr('onclick', 'finalizarReunion()');
+        $('#id_reunion').val(sessionStorage.getItem('id_reunion'));
+    }
 });
 
 function guardarReunion(nombreReunion = null) {
@@ -33,11 +42,25 @@ function guardarReunion(nombreReunion = null) {
                 $('#btnGuardarReunion').removeClass('btn-primary').addClass('btn-danger').html(
                     '<i class="fas fa-times"></i> Finalizar').attr('onclick', 'finalizarReunion()');
                 alerta('success', 'Info', 'Se guardo la reunión');
+                
+                sessionStorage.setItem('id_reunion', data);
+                sessionStorage.setItem('nombre_reunion', nombre_reunion);
             } else {
                 alerta('error', 'Error', 'No se pudo guardar la reunión');
             }
         }
     })
+}
+
+function finalizarReunion(){
+    sessionStorage.removeItem('id_reunion');
+    sessionStorage.removeItem('nombre_reunion');
+
+    $('#nombreReunion').val('').prop('readonly', false);
+    $('#btnGuardarReunion').removeClass('btn-danger').addClass('btn-primary').html(
+        '<i class="fas fa-save"></i> Guardar').attr('onclick', 'guardarReunion()');
+    $('#id_reunion').val('');
+    alerta('success', 'Info', 'Se finalizó la reunión');
 }
 
 async function guardarRegistro() {
